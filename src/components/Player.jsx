@@ -50,11 +50,20 @@ function Player({ song }) {
     return (
         <div>
             {isPlaying ? (
-                <h2>Está tocando a música: {tracks[currentIndex]?.name}</h2>
+                <>
+                    <h2>Está tocando a música: {tracks[currentIndex]?.name}</h2>
+                    <h2>Artista: {tracks[currentIndex]?.artistName}</h2>
+                    <h2>Álbum: {tracks[currentIndex]?.albumName}</h2>
+                    <h2>Tempo: {tracks[currentIndex]?.playbackSeconds}</h2>
+                </>
             ) : (
                 <h2>A música está parada</h2>
             )}
             <audio ref={music} src={tracks[currentIndex]?.music || "https://listen.hs.llnwd.net/g3/prvw/5/5/7/1/6/2630961755.mp3"} ></audio>
+            {/*Por algum motivo o music, ao passar para próxima música, ele atrasa 1 música, então o nome da música não fica de acordo com a música que ta tocando*/}
+
+            {/*Se adicionar 'previewUrl' ao invés de 'music', ao passar a música, tem que pausar primeiro e depois coloca pra tocar de novo, mas não tem esse problema de atraso*/}
+            
             <button onClick={ prev }>Anterior</button>
             <button onClick={ isPlaying ? pause : play}>
                 { isPlaying ? "pause" : "play"}
